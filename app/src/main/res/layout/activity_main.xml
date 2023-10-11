@@ -8,6 +8,27 @@
     android:orientation="vertical"
     android:padding="3dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gen"
+            android:textColor="@color/black"
+            android:background="@drawable/border_button"
+            android:id="@+id/btnGen"
+            />
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:id="@+id/edtRow"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/border_button"/>
+
+    </LinearLayout>
     <TextView
         android:id="@+id/txtMsg"
         android:layout_width="match_parent"
@@ -15,9 +36,9 @@
         android:text="You choose: "
         android:textSize="20sp"
         android:gravity="center_vertical"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>

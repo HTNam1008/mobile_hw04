@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     TextView txtMsg;
@@ -16,6 +18,11 @@ public class MainActivity extends Activity {
     String[] phones={"0359935724","098798787","0824417567","0357456282","0567843211"};
     Integer[] thumbnails={R.drawable.icon_teamwork_1,R.drawable.icon_teamwork_2,R.drawable.icon_teamwork_3,R.drawable.icon_teamwork_4,R.drawable.icon_teamwork_5};
 
+    Button btnGen;
+    TextView txtRow;
+
+    Integer nRows;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,27 @@ public class MainActivity extends Activity {
 
         txtMsg = (TextView) findViewById(R.id.txtMsg);
         listView=findViewById(R.id.listView);
+
+        btnGen=(Button) findViewById(R.id.btnGen);
+        txtRow=(TextView) findViewById(R.id.edtRow);
+
+        btnGen.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                String text=txtRow.getText().toString();
+                if (text!=null){
+                    try {
+                        nRows = Integer.parseInt(text);
+                    } catch(NumberFormatException nfe) {
+                        Toast.makeText(getApplication().getBaseContext(),"Invalid number!",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplication().getBaseContext(),"Please enter number!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         CustomIconLabelAdapter adapter=new CustomIconLabelAdapter(this,R.layout.custom_row_icon_label,names,phones,thumbnails);
 
