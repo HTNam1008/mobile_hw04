@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     ListView listView;
     String[] names;
     String[] phones={"0359935724","098798787","0824417567","0357456282","0567843211"};
-    Integer[] thumbnails={R.drawable.icon_teamwork_1,R.drawable.icon_teamwork_2,R.drawable.icon_teamwork_3,R.drawable.icon_teamwork_4,R.drawable.icon_teamwork_5};
+    Integer[] thumbnails;
 
     Button btnGen;
     TextView txtRow;
@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
                         Toast.makeText(getApplication().getBaseContext(),"Invalid number!",Toast.LENGTH_SHORT).show();
                     }
                     names = generateName(nRows);
+                    thumbnails = randomThumbnail(nRows);
                     adapter=new CustomIconLabelAdapter(MainActivity.this,R.layout.custom_row_icon_label,names,phones,thumbnails);
 
                     listView.setAdapter(adapter);
@@ -143,5 +144,21 @@ public class MainActivity extends Activity {
     };
     public static final int countFemale = givenNameFemale.length;
     //add components
+
+    public Integer[] randomThumbnail(int n)
+    {
+        Integer[] thumbnails = new Integer[n];
+
+        int[] images = {R.drawable.icon_teamwork_1,R.drawable.icon_teamwork_2,R.drawable.icon_teamwork_3,R.drawable.icon_teamwork_4,
+                R.drawable.icon_teamwork_5,R.drawable.icon_teamwork_6,R.drawable.icon_teamwork_7,R.drawable.icon_teamwork_8,
+                R.drawable.icon_teamwork_9,R.drawable.icon_teamwork_10};
+
+        for(int i = 0; i < n; i++) {
+            int random = (int) Math.floor(Math.random() * (images.length));
+            thumbnails[i] = images[random];
+        }
+
+        return thumbnails;
+    }
 }
 
