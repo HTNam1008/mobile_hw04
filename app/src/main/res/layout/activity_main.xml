@@ -15,8 +15,8 @@
 
         <Button
             android:id="@+id/btnGen"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/border_button"
             android:text="GEN"
             android:textColor="@color/black"
@@ -25,28 +25,30 @@
         <EditText
             android:id="@+id/edtGen"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/border_button"
             android:textAlignment="center"
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:background="@drawable/border_button"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="Page"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="24sp"
              />
 
         <Spinner
             android:id="@+id/spinnerPage"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:gravity="center"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/border_button"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <TextView
