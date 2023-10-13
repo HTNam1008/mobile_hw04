@@ -6,9 +6,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,12 +22,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends Activity {
     Spinner spinnerPage;
     Button btnGen;
     EditText edtGen;
     TextView txtMsg;
     ListView listView;
+
     public String[] familyName={
             "Nguyễn", "Nguyễn", "Nguyễn", "Nguyễn", "Nguyễn", "Nguyễn",
             "Phạm","Đinh","Hoàng","Phan","Huỳnh","Thái", "Tô", "Trịnh",
@@ -59,16 +62,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     Integer[] thumbnails;
     String[] pages;
     int rngNum;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         txtMsg = (TextView) findViewById(R.id.txtMsg);
-        listView=(ListView) findViewById(R.id.listView);
-        spinnerPage=(Spinner) findViewById(R.id.spinnerPage);
-        btnGen=(Button) findViewById(R.id.btnGen);
-        edtGen=(EditText) findViewById(R.id.edtGen);
+        listView = (ListView) findViewById(R.id.listView);
+        spinnerPage = (Spinner) findViewById(R.id.spinnerPage);
+        btnGen = (Button) findViewById(R.id.btnGen);
+        edtGen = (EditText) findViewById(R.id.edtGen);
 
 
         btnGen.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +84,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                     String txtGen = edtGen.getText().toString();
                     try {
                         rngNum = Integer.valueOf(txtGen);
-                    } catch(NumberFormatException nfe) {
-                        Toast.makeText(getApplication().getBaseContext(),"Invalid number!",Toast.LENGTH_SHORT).show();
+                    } catch (NumberFormatException nfe) {
+                        Toast.makeText(getApplication().getBaseContext(), "Invalid number!", Toast.LENGTH_SHORT).show();
                     }
 
                     generatePages(rngNum);
@@ -87,71 +93,67 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                     generatePhones(rngNum);
                     generateIcons(rngNum);
 
-                    ArrayAdapter<String> adapterPage=new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item,pages);
+                    ArrayAdapter<String> adapterPage = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, pages);
                     spinnerPage.setAdapter(adapterPage);
-                }
-                else {
-                    int duration=Toast.LENGTH_SHORT;
-                    Toast.makeText(MainActivity.this,"None",duration).show();
+                } else {
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast.makeText(MainActivity.this, "None", duration).show();
                 }
             }
         });
-
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                txtMsg.setText("You choose: "+names[position]);
+                txtMsg.setText("You choose: " + names[position]);
             }
         });
-        spinnerPage.setOnItemSelectedListener(this);
 
-    }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        try {
-            String[] namesPage;
-            String[] phonesPage;
-            Integer[] thumbnailsPage;
-            if (names.length-position*5>=5) {
-                namesPage=new String[5];
-                phonesPage=new String[5];
-                thumbnailsPage=new Integer[5];
-            }
-            else {
-                namesPage=new String[names.length-position*5];
-                phonesPage=new String[names.length-position*5];
-                thumbnailsPage=new Integer[names.length-position*5];
-            }
+        spinnerPage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    String[] namesPage;
+                    String[] phonesPage;
+                    Integer[] thumbnailsPage;
+                    if (names.length - position * 5 >= 5) {
+                        namesPage = new String[5];
+                        phonesPage = new String[5];
+                        thumbnailsPage = new Integer[5];
+                    } else {
+                        namesPage = new String[names.length - position * 5];
+                        phonesPage = new String[names.length - position * 5];
+                        thumbnailsPage = new Integer[names.length - position * 5];
+                    }
 
-            int index=0;
+                    int index = 0;
 
-            for (int i=position*5;i<(position+1)*5;i++) {
-                if (i<names.length) {
-                    namesPage[index] = names[i];
-                    phonesPage[index] = phones[i];
-                    thumbnailsPage[index] = thumbnails[i];
+                    for (int i = position * 5; i < (position + 1) * 5; i++) {
+                        if (i < names.length) {
+                            namesPage[index] = names[i];
+                            phonesPage[index] = phones[i];
+                            thumbnailsPage[index] = thumbnails[i];
+                        } else {
+                            break;
+                        }
+                        index++;
+                    }
+
+                    CustomIconLabelAdapter adapterContact = new CustomIconLabelAdapter(MainActivity.this, R.layout.custom_row_icon_label, namesPage, phonesPage, thumbnailsPage);
+                    listView.setAdapter(adapterContact);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
                 }
-                else {
-                    break;
-                }
-                index++;
             }
 
-            CustomIconLabelAdapter adapterContact = new CustomIconLabelAdapter(MainActivity.this, R.layout.custom_row_icon_label, namesPage, phonesPage, thumbnailsPage);
-            listView.setAdapter(adapterContact);
-        }
-        catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
-        }
-    }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
     }
-
     private String[] generatePages(int rngNum) {
         int numPage;
         if (rngNum%5==0) {
@@ -246,5 +248,5 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
         return names;
     }
-
 }
+

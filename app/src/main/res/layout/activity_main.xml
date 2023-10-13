@@ -4,55 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    android:padding="3dp">
+    android:padding="3dp"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnGen"
-            android:layout_height="60dp"
             android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/border_button"
             android:text="GEN"
-            android:textSize="24sp"
-            
-            />
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/edtGen"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:gravity="center_horizontal"
-            />
+            android:layout_height="60dp"
+            android:background="@drawable/border_button"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
         <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/border_button"
+            android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:text="Page"
             android:textSize="24sp"
-            android:text="Page"/>
+             />
+
         <Spinner
             android:id="@+id/spinnerPage"
             android:layout_width="100dp"
-            android:layout_height="60dp"/>
+            android:layout_height="60dp"
+            android:gravity="center"
+            />
     </LinearLayout>
+
     <TextView
         android:id="@+id/txtMsg"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:gravity="center_vertical"
         android:text="You choose: "
-        android:textSize="20sp"
-        android:gravity="center_vertical"/>
+        android:textSize="20sp" />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-    </ListView>
+
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
