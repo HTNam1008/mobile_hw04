@@ -8,6 +8,40 @@
     android:orientation="vertical"
     android:padding="3dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnGen"
+            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:text="GEN"
+            android:textSize="24sp"
+            
+            />
+
+        <EditText
+            android:id="@+id/edtGen"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="24sp"
+            android:text="Page"/>
+        <Spinner
+            android:id="@+id/spinnerPage"
+            android:layout_width="100dp"
+            android:layout_height="60dp"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/txtMsg"
         android:layout_width="match_parent"
@@ -18,6 +52,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
     </ListView>
 </LinearLayout>
